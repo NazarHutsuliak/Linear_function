@@ -11,7 +11,6 @@ namespace LinearLibrary
 
         private int gcd;
 
-
         public Fraction(int whole, double numerator, double denumerator)
         {
             this.whole = whole;
@@ -63,7 +62,6 @@ namespace LinearLibrary
 
         public override string ToString()
         {
-            
             if (whole >= 0 && whole < 1)
                 return $"{sign} {numerator}/{denumerator}";
             if (numerator == 0)
