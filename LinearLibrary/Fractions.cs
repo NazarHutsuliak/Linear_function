@@ -3,20 +3,28 @@ namespace LinearLibrary
 {
     public class Fraction
     {
-        public double whole { get; set; }
+        public int whole { get; set; }
         public double numerator { get; set; }
         public double denumerator { get; set; }
 
-        public string sign = "+";
-        
-        public Fraction(double whole, double numerator, double denumerator)
+        private string sign = "+";
+
+        private int gcd;
+
+
+        public Fraction(int whole, double numerator, double denumerator)
         {
             this.whole = whole;
             this.numerator = numerator;
             this.denumerator = denumerator;
+            InitSign();
+            if (denumerator != 0)
+            {
+                SimplificationFraction();
+            }
         }
 
-        static int GCD(int a, int b)
+        public  int GreatestCommonDivisor(int a , int b)
         {
             while (b != 0)
             {
@@ -27,9 +35,9 @@ namespace LinearLibrary
             return a;
         }
 
-        public void getSign()
+        public void InitSign()
         {
-            if (numerator < 0 && denumerator < 0 || numerator < 0 && denumerator < 0) 
+            if (numerator < 0 && denumerator < 0 || numerator > 0 && denumerator > 0) 
             {
                 numerator = Math.Abs(numerator);
                 denumerator = Math.Abs(denumerator);
@@ -46,16 +54,16 @@ namespace LinearLibrary
         
         public void SimplificationFraction()
         {
+            gcd = GreatestCommonDivisor((int)numerator, (int)denumerator);
             whole = (int)numerator / (int)denumerator;
             numerator -= whole * (int)denumerator;
-            denumerator /= GCD((int)numerator, (int)denumerator);
-            numerator /= GCD((int)numerator, (int)denumerator);    
+            denumerator /= gcd;
+            numerator /= gcd;    
         }
 
         public override string ToString()
         {
-            getSign();
-            SimplificationFraction();
+            
             if (whole >= 0 && whole < 1)
                 return $"{sign} {numerator}/{denumerator}";
             if (numerator == 0)

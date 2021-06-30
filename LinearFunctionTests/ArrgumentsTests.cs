@@ -21,7 +21,7 @@ namespace LinearFunctionTests
         public void answerTest_x1_5_y2_4_x2_1_y2_2_Result_string_y_is_equal_0point5_x_plus_1point5()
         {
             //Arrange
-            const string expected = "y = 1/2 * x + 1 1/2";
+            const string expected = "y = + 1/2 * x + 1 1/2";
 
             //Act
             var actual = new LinearFunction(new Coordinates(5, 4, 1, 2)).ToString();
@@ -54,6 +54,16 @@ namespace LinearFunctionTests
 
             //Assert
             Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void GreatestCommonDivisor()
+        {
+            //Act
+
+            var actual = new Fraction(0, 4, 12).GreatestCommonDivisor(4,12).ToString();
+
+            //Assert
+            Assert.Equal("4", actual);
         }
     }
 }
