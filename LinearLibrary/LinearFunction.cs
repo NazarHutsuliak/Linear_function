@@ -17,10 +17,12 @@
         }
         
         public override string ToString()
-        {   if(_coordinates.X1==_coordinates.Y1 && _coordinates.X2 == _coordinates.Y2)
+        {   
+            if(_coordinates.X1==_coordinates.Y1 && _coordinates.X2 == _coordinates.Y2)
             {
                 return  $"y = x";
             }
+            
             if (_coordinates.X1 == _coordinates.X2)
             {
                 return $"x = {_coordinates.X1}";
