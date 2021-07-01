@@ -7,7 +7,7 @@ namespace LinearLibrary
         public double numerator { get; set; }
         public double denumerator { get; set; }
 
-        private string sign = "+";
+        public string sign = "+";
 
         private int gcd;
 
@@ -48,9 +48,9 @@ namespace LinearLibrary
                 denumerator = Math.Abs(denumerator);
                 sign = "-";
             }
-               
+
         }
-        
+            
         public void SimplificationFraction()
         {
             gcd = GreatestCommonDivisor((int)numerator, (int)denumerator);
@@ -62,12 +62,24 @@ namespace LinearLibrary
 
         public override string ToString()
         {
-            if (whole >= 0 && whole < 1)
-                return $"{sign} {numerator}/{denumerator}";
-            if (numerator == 0)
-                return $"{sign} {whole}";
+            if (sign == "-")
+            {
+                if (whole >= 0 && whole < 1)
+                    return $"{sign} {numerator}/{denumerator}";
+                if (numerator == 0)
+                    return $"{sign} {whole}";
+                else
+                    return $"{sign} {whole} {numerator}/{denumerator}";
+            }
             else
-                return $"{sign} {whole} {numerator}/{denumerator}";
+            {
+                if (whole >= 0 && whole < 1)
+                    return $"{numerator}/{denumerator}";
+                if (numerator == 0)
+                    return $"{whole}";
+                else
+                    return $"{whole} {numerator}/{denumerator}";
+            }
         }
         
     }
