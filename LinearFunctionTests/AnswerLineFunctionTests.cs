@@ -21,9 +21,9 @@ namespace LinearFunctionTests
         {
             // Arrange
             const string expected = "y = 1/2 * x + 1 1/2";
-            //Act
+            // Act
             var actual = new LinearFunction(new Coordinates(5, 4, 1, 2)).ToString();
-            //Assert
+            // Assert
             Assert.Equal(expected, actual);
         }
     }
