@@ -27,10 +27,7 @@
             if (_coordinates.Y1 == _coordinates.Y2)
                 return $"y = {_coordinates.Y1}";
 
-            if (B.sign == "+")
-                return $"y = {K} * x + {B}";
-            else
-                return $"y = {K} * x {B}";
+            return $"y = {K} * x {B.ToStringWithPositiveSign()}";
         }
     }
 }

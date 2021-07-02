@@ -1,87 +1,79 @@
 ﻿using System;
+using System.Text;
 namespace LinearLibrary
 {
     public class Fraction
     {
-        public int whole { get; set; }
+        public int whole { get; private set; }
         public double numerator { get; set; }
-        public double denumerator { get; set; }
+        public double denominator { get; set; }
 
-        public string sign = "+";
+        private string sign = "+";
 
         private int gcd;
 
-        public Fraction(int whole, double numerator, double denumerator)
+        public Fraction(int whole, double numerator, double denominator)
         {
             this.whole = whole;
             this.numerator = numerator;
-            this.denumerator = denumerator;
+            this.denominator = denominator;
+
             InitSign();
-            if (denumerator != 0)
-            {
+
+            if (denominator != 0)
                 SimplificationFraction();
-            }
+        }
+
+        private void InitSign()
+        {
+            if (numerator < 0 && denominator > 0
+                || numerator > 0 && denominator < 0)
+                sign = "-";
+
+            numerator = Math.Abs(numerator);
+            denominator = Math.Abs(denominator);
+        }
+
+        private void SimplificationFraction()
+        {
+            whole = (int)numerator / (int)denominator;
+            numerator -= whole * (int)denominator;
+
+            gcd = GreatestCommonDivisor((int)numerator, (int)denominator);
+            denominator /= gcd;
+            numerator /= gcd;
         }
 
         public  int GreatestCommonDivisor(int a , int b)
         {
             while (b != 0)
             {
-                var t = b;
+                var temp = b;
                 b = a % b;
-                a = t;
+                a = temp;
             }
             return a;
         }
 
-        public void InitSign()
-        {
-            if (numerator < 0 && denumerator < 0 || numerator > 0 && denumerator > 0) 
-            {
-                numerator = Math.Abs(numerator);
-                denumerator = Math.Abs(denumerator);
-                sign = "+";
-            }
-            else
-            {
-                numerator = Math.Abs(numerator);
-                denumerator = Math.Abs(denumerator);
-                sign = "-";
-            }
-
-        }
-            
-        public void SimplificationFraction()
-        {
-            gcd = GreatestCommonDivisor((int)numerator, (int)denumerator);
-            whole = (int)numerator / (int)denumerator;
-            numerator -= whole * (int)denumerator;
-            denumerator /= gcd;
-            numerator /= gcd;    
-        }
-
         public override string ToString()
         {
+            var result = new StringBuilder();
+
             if (sign == "-")
-            {
-                if (whole >= 0 && whole < 1)
-                    return $"{sign} {numerator}/{denumerator}";
-                if (numerator == 0)
-                    return $"{sign} {whole}";
-                else
-                    return $"{sign} {whole} {numerator}/{denumerator}";
-            }
-            else
-            {
-                if (whole >= 0 && whole < 1)
-                    return $"{numerator}/{denumerator}";
-                if (numerator == 0)
-                    return $"{whole}";
-                else
-                    return $"{whole} {numerator}/{denumerator}";
-            }
+                result.Append($"{sign} ");
+
+            if (whole != 0)
+                result.Append($"{whole} ");
+
+            if (numerator != 0)
+                result.Append($"{numerator}/{denominator}");
+
+            return result.ToString();   
         }
-        
+
+        public string ToStringWithPositiveSign()
+        {
+            return sign == "+" ? $"+ {ToString()}" : ToString();
+        }
     }
 } 
-
