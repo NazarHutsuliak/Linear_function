@@ -20,10 +20,16 @@ namespace LinearLibrary
 
             InitSign();
 
-            if (denominator != 0)
+            try
+            {
                 SimplificationFraction();
-        }
+            }
+            catch (DivideByZeroException)
+            {
 
+            }
+
+        }
         private void InitSign()
         {
             if (numerator < 0 && denominator > 0
@@ -66,14 +72,31 @@ namespace LinearLibrary
                 result.Append($"{whole} ");
 
             if (numerator != 0)
-                result.Append($"{numerator}/{denominator}");
+                result.Append($"{numerator}/{denominator} ");
 
             return result.ToString();   
         }
 
         public string ToStringWithPositiveSign()
         {
+            if (whole == 0 && numerator == 0)
+                return "";
+
             return sign == "+" ? $"+ {ToString()}" : ToString();
+        }
+
+        public string ToStringMultiplactionSign()
+        {
+            if (whole == 0 && numerator == 0 ||
+                whole == 1 && numerator == 0)
+            {
+                return  "x ";
+            }
+                
+            else
+            {
+                return $"{ToString()}" + "* x ";
+            }
         }
     }
 } 

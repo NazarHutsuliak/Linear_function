@@ -20,7 +20,7 @@ namespace LinearFunctionTests
         public void x1_5_y2_4_x2_1_y2_2_Result_string_y_is_equal_1num_2denum_x_plus_1whole_1num_2denum()
         {
             // Arrange
-            const string expected = "y = 1/2 * x + 1 1/2";
+            const string expected = "y = 1/2 * x + 1 1/2 ";
             // Act
             var actual = new LinearFunction(new Coordinates(5, 4, 1, 2)).ToString();
             // Assert
