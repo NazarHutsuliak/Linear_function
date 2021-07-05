@@ -26,7 +26,7 @@ namespace LinearLibrary
             }
             catch (DivideByZeroException)
             {
-
+                Console.WriteLine("denominator = 0");
             }
 
         }
